@@ -35,7 +35,7 @@
 
                 if (user) {
                     // Send the request to the Google Apps Script Web App
-                    fetch("YOUR_GOOGLE_SCRIPT_WEB_APP_URL", {
+                    fetch("https://script.google.com/macros/s/AKfycby6kz8a8f347JSvWdb1hRFDtKwEHUuIy_QGGsgAnGfBiDuZ5kGf8xprr89LPal0XdV9/exec", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ action: "add", user: user, button: button }) // Action is 'add' or 'update'
@@ -56,7 +56,7 @@
 
                 if (user) {
                     // Send the request to remove the user from the Google Sheets
-                    fetch("YOUR_GOOGLE_SCRIPT_WEB_APP_URL", {
+                    fetch("https://script.google.com/macros/s/AKfycby6kz8a8f347JSvWdb1hRFDtKwEHUuIy_QGGsgAnGfBiDuZ5kGf8xprr89LPal0XdV9/exec", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ action: "remove", user: user }) // Action is 'remove'
