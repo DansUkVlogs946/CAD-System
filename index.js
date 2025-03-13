@@ -51,7 +51,7 @@ function sendButtonData(buttonName) {
   }
 
   document.getElementById("removeButton").addEventListener("click", function() {
-    var user = document.getElementById("userCallsign").value;
+    var user = document.getElementById("userCallSign").value;
     if (!user) {
       alert("Please enter a callsign.");
       return;
