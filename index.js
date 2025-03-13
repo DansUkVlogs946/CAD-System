@@ -46,12 +46,12 @@ function sendButtonData(buttonName) {
         elements[i].style.color = "white";
     }
 
-
     document.getElementById(buttonName.replace(/\s+/g, '')).style.color = "lightgreen";
   }
 
+  // Remove function
   document.getElementById("removeButton").addEventListener("click", function() {
-    var user = document.getElementById("userCallSign").value;
+    const user = document.getElementById('userCallSign').value; 
     if (!user) {
       alert("Please enter a callsign.");
       return;
