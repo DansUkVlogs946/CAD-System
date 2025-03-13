@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAD System</title>
+</head>
+<body>
+    <h1>Click a Button</h1>
+    <button onclick="sendData('Button 1')">Avaliable</button>
+    <button onclick="sendData('Button 2')">Busy</button>
+    <button onclick="sendData('Button 3')">En Route</button>
+    <button onclick="sendData('Button 4')">Standby</button>
+    <button onclick="sendData('Button 5')">Going To Hospital</button>
+    <button onclick="sendData('Button 6')">At Hospital</button>
+
+
+    <script>
+        function sendData(buttonName) {
+            fetch("https://script.google.com/macros/s/AKfycbylgPywLZzKF0KG3tHZFMvEYAhUj-ZFvzQ-VoCnmh23C_SR6fl1CmOLkRyML7YM5OgmQw/exec", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ button: buttonName, user: "Anonymous" })
+            })
+            .then(response => response.text())
+            .then(data => alert("Button Clicked: " + buttonName))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
