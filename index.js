@@ -50,9 +50,8 @@ function sendButtonData(buttonName) {
     document.getElementById(buttonName.replace(/\s+/g, '')).style.color = "lightgreen";
   }
 
-  // Button to remove the user
-document.getElementById("removeButton").addEventListener("click", function() {
-    var user = document.getElementById("userCallSign").value;
+  document.getElementById("removeButton").addEventListener("click", function() {
+    var user = document.getElementById("userCallsign").value;
     if (!user) {
       alert("Please enter a callsign.");
       return;
@@ -65,13 +64,13 @@ document.getElementById("removeButton").addEventListener("click", function() {
       },
       body: JSON.stringify({
         user: user,  // Pass the callsign to be removed
-        button: "remove"  // We can use this to differentiate between adding and removing data
+        button: "remove"  // Set button to "remove" for removal action
       })
     })
     .then(response => response.text())
     .then(data => {
-      console.log("Success:", data);
-      alert(data);  // Show success or failure message
+      console.log("Response:", data);  // Log success or failure message
+      alert(data);  // Display message in an alert box
     })
     .catch(error => {
       console.error("Error:", error);
