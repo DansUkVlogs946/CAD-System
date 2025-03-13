@@ -3,29 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAD System</title>
+    <title>Button Press Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 8px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Click a Button</h1>
-    <button onclick="sendData('Button 1')">Avaliable</button>
-    <button onclick="sendData('Button 2')">Busy</button>
-    <button onclick="sendData('Button 3')">En Route</button>
-    <button onclick="sendData('Button 4')">Standby</button>
-    <button onclick="sendData('Button 5')">Going To Hospital</button>
-    <button onclick="sendData('Button 6')">At Hospital</button>
-
+    <h2>Button Press Tracker</h2>
+    
+    <label for="usernameInput">Enter Your Callsign:</label>
+    <input type="text" id="usernameInput" placeholder="Enter Callsign">
+    <br>
+    
+    <button id="buttonClick">Click Test Button</button>
+    <button id="removeButton">Remove Your Data</button>
 
     <script>
-        function sendData(buttonName) {
-            fetch("https://script.google.com/macros/s/AKfycbylgPywLZzKF0KG3tHZFMvEYAhUj-ZFvzQ-VoCnmh23C_SR6fl1CmOLkRyML7YM5OgmQw/exec", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ button: buttonName, user: "Anonymous" })
-            })
-            .then(response => response.text())
-            .then(data => alert("Button Clicked: " + buttonName))
-            .catch(error => console.error("Error:", error));
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // Function to handle button click (add/update button press)
+            document.getElementById("buttonClick").addEventListener("click", function() {
+                var user = document.getElementById("usernameInput").value; // Get the user's callsign
+                var button = "Test Button"; // This is the button clicked; you can change this dynamically based on which button is clicked
+
+                if (user) {
+                    // Send the request to the Google Apps Script Web App
+                    fetch("YOUR_GOOGLE_SCRIPT_WEB_APP_URL", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ action: "add", user: user, button: button }) // Action is 'add' or 'update'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert("Data successfully added/updated.");
+                    })
+                    .catch(error => console.error("Error:", error));
+                } else {
+                    alert("Please enter a valid username.");
+                }
+            });
+
+            // Function to handle remove button click
+            document.getElementById("removeButton").addEventListener("click", function() {
+                var user = document.getElementById("usernameInput").value; // Get the user's callsign
+
+                if (user) {
+                    // Send the request to remove the user from the Google Sheets
+                    fetch("YOUR_GOOGLE_SCRIPT_WEB_APP_URL", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ action: "remove", user: user }) // Action is 'remove'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "removed") {
+                            alert("User removed successfully!");
+                        } else {
+                            alert("User not found.");
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+                } else {
+                    alert("Please enter a valid username.");
+                }
+            });
+
+        });
     </script>
 </body>
 </html>
