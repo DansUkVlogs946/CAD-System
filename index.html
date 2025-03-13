@@ -4,21 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Button Click Tracker</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
   <!-- Text box for entering the user's call sign -->
   <input type="text" id="userCallSign" placeholder="Enter your callsign">
-
+  <button id="removeButton">Remove User</button>
+    <br>
   <!-- 8 buttons for different actions -->
-  <button class="button" data-button="Button 1">Avaliable</button>
-  <button class="button" data-button="Button 2">Enroute</button>
-  <button class="button" data-button="Button 3">On Scene</button>
-  <button class="button" data-button="Button 4">Going To Hospital</button>
-  <button class="button" data-button="Button 5">At Hospital</button>
-  <button class="button" data-button="Button 6">Going To Base</button>
-  <button class="button" data-button="Button 7">At Base</button>
-  <button class="button" data-button="Button 8">Busy</button>
+  <button class="button" id="Avaliable" data-button="Avaliable">Avaliable</button>
+  <button class="button" id="Enroute" data-button="Enroute">Enroute</button>
+  <button class="button" id="OnScene" data-button="On Scene">On Scene</button>
+  <button class="button" id="GoingToHospital" data-button="Going To Hospital">Going To Hospital</button>
+  <button class="button" id="AtHospital" data-button="At Hospital">At Hospital</button>
+  <button class="button" id="GoingToBase" data-button="Going To Base">Going To Base</button>
+  <button class="button" id="AtBase" data-button="At Base">At Base</button>
+  <button class="button" id="Busy" data-button="Busy">Busy</button>
 
   <script src="index.js"></script>
 

@@ -1,0 +1,19 @@
+button {
+    font-size: 4vh;
+    background-color: grey;
+    color: white;
+    border: 1vh fixed black;
+    border-radius: 1vh;
+}
+
+button:active {
+    color: green;
+}
+
+#userCallSign {
+    font-size: 4vh;
+    border: 1vh fixed black;
+    border-radius: 1vh;
+    padding: 1vh;
+    margin-bottom: 10vh;
+}
