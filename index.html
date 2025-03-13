@@ -1,81 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Button Press Tracker</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        input, button {
-            margin: 10px;
-            padding: 8px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Click Tracker</title>
 </head>
 <body>
-    <h2>Button Press Tracker</h2>
-    
-    <label for="usernameInput">Enter Your Callsign:</label>
-    <input type="text" id="usernameInput" placeholder="Enter Callsign">
-    <br>
-    
-    <button id="buttonClick">Click Test Button</button>
-    <button id="removeButton">Remove Your Data</button>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            
-            // Function to handle button click (add/update button press)
-            document.getElementById("buttonClick").addEventListener("click", function() {
-                var user = document.getElementById("usernameInput").value; // Get the user's callsign
-                var button = "Test Button"; // This is the button clicked; you can change this dynamically based on which button is clicked
+  <!-- Text box for entering the user's call sign -->
+  <input type="text" id="userCallSign" placeholder="Enter your callsign">
 
-                if (user) {
-                    // Send the request to the Google Apps Script Web App
-                    fetch("https://script.google.com/macros/s/AKfycby6kz8a8f347JSvWdb1hRFDtKwEHUuIy_QGGsgAnGfBiDuZ5kGf8xprr89LPal0XdV9/exec", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ action: "add", user: user, button: button }) // Action is 'add' or 'update'
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert("Data successfully added/updated.");
-                    })
-                    .catch(error => console.error("Error:", error));
-                } else {
-                    alert("Please enter a valid username.");
-                }
-            });
+  <!-- 8 buttons for different actions -->
+  <button class="button" data-button="Button 1">Button 1</button>
+  <button class="button" data-button="Button 2">Button 2</button>
+  <button class="button" data-button="Button 3">Button 3</button>
+  <button class="button" data-button="Button 4">Button 4</button>
+  <button class="button" data-button="Button 5">Button 5</button>
+  <button class="button" data-button="Button 6">Button 6</button>
+  <button class="button" data-button="Button 7">Button 7</button>
+  <button class="button" data-button="Button 8">Button 8</button>
 
-            // Function to handle remove button click
-            document.getElementById("removeButton").addEventListener("click", function() {
-                var user = document.getElementById("usernameInput").value; // Get the user's callsign
+  <script>
+    // Function to handle button click
+    function sendButtonData(buttonName) {
+      var user = document.getElementById("userCallSign").value;
 
-                if (user) {
-                    // Send the request to remove the user from the Google Sheets
-                    fetch("https://script.google.com/macros/s/AKfycby6kz8a8f347JSvWdb1hRFDtKwEHUuIy_QGGsgAnGfBiDuZ5kGf8xprr89LPal0XdV9/exec", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ action: "remove", user: user }) // Action is 'remove'
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === "removed") {
-                            alert("User removed successfully!");
-                        } else {
-                            alert("User not found.");
-                        }
-                    })
-                    .catch(error => console.error("Error:", error));
-                } else {
-                    alert("Please enter a valid username.");
-                }
-            });
+      if (!user) {
+        alert("Please enter your callsign.");
+        return;
+      }
 
-        });
-    </script>
+      // Prepare the POST request data
+      var data = {
+        button: buttonName,
+        user: user
+      };
+
+      // Send the POST request
+      fetch("https://script.google.com/macros/s/AKfycby6kz8a8f347JSvWdb1hRFDtKwEHUuIy_QGGsgAnGfBiDuZ5kGf8xprr89LPal0XdV9/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        mode: "no-cors" // Bypass CORS issues
+      })
+      .then(response => {
+        console.log("Request sent successfully!");
+        alert("Data sent successfully!");
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Error occurred while sending data.");
+      });
+    }
+
+    // Add event listeners for all the buttons
+    var buttons = document.querySelectorAll(".button");
+    buttons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        var buttonName = this.getAttribute("data-button");
+        sendButtonData(buttonName);
+      });
+    });
+  </script>
+
 </body>
 </html>
