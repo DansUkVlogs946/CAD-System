@@ -9,14 +9,14 @@ async function sendButtonData(buttonName) {
     var data = { button: buttonName, user: user };
 
     try {
-        let response = await fetch("https://script.google.com/macros/s/AKfycby6kz8a8f347JSvWdb1hRFDtKwEHUuIy_QGGsgAnGfBiDuZ5kGf8xprr89LPal0XdV9/exec", {
+        let response = await fetch("https://script.google.com/macros/s/AKfycbxn9gxJqkZHO1Em0mhWxGlYjvYJxd99V3PiFfjthV1ete1q4Fv6YLWOkduEyEBlyj_WJg/exec", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
 
-        let result = await response.text(); // Fix: Expect text response, not JSON
-        alert(result);
+        let result = await response.json();
+        alert(result.message);
         console.log(result);
     } catch (error) {
         console.error("Error:", error);
