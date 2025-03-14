@@ -9,10 +9,15 @@ async function sendButtonData(buttonName) {
     var data = { button: buttonName, user: user };
 
     try {
-        let response = await fetch("https://script.google.com/macros/s/AKfycbxn9gxJqkZHO1Em0mhWxGlYjvYJxd99V3PiFfjthV1ete1q4Fv6YLWOkduEyEBlyj_WJg/exec", {
+        // Using a proxy to bypass CORS issue
+        const proxyUrl = "https://cors-anywhere.herokuapp.com/"; // Free proxy service
+        const targetUrl = "https://script.google.com/macros/s/AKfycbxn9gxJqkZHO1Em0mhWxGlYjvYJxd99V3PiFfjthV1ete1q4Fv6YLWOkduEyEBlyj_WJg/exec"; // Your Google Apps Script URL
+        const finalUrl = proxyUrl + targetUrl;
+
+        let response = await fetch(finalUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
 
         let result = await response.json();
