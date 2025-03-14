@@ -14,19 +14,19 @@ async function sendButtonData(buttonName) {
     try {
       let response = await fetch("https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-        mode: "cors"
-      });
-  
-      let result = await response.json();
-      alert(result.message);
-      console.log(result);
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+      mode: "cors"  // Explicitly enable CORS
+        });
+
+        let result = await response.json();
+        alert(result.message);
+        console.log(result);
     } catch (error) {
-      console.error("Error:", error);
-      alert("Error while sending data.");
+        console.error("Error:", error);
+        alert("Error while sending data.");
     }
-  }
+    }
   
   // Add event listeners to buttons
   document.querySelectorAll(".button").forEach(button => {
