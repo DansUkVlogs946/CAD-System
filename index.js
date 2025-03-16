@@ -1,37 +1,43 @@
 const CLIENT_ID = '238918197298-0h1h33oh88lmdl9etpu9181hpefamkm8.apps.googleusercontent.com';
-const API_KEY = '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'; // Replace with your actual API key
+const API_KEY = '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'; // Replace with your actual API key
 const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 let auth2;
 
 // Initialize Google API client and auth2
 function handleClientLoad() {
-  gapi.load('client:auth2', initClient); // Initialize client when API is loaded
-}
+    console.log(gapi); // Check if gapi is loaded
+    gapi.load('client:auth2', initClient);
+  }
+  
 
 // Initialize the API client and set up the sign-in status
-function initClient() {
-  gapi.client.init({
-    apiKey: API_KEY,
-    clientId: CLIENT_ID,
-    scope: SCOPES,
-  }).then(function() {
-    auth2 = gapi.auth2.getAuthInstance(); // Initialize auth2 instance
-    auth2.isSignedIn.listen(updateSigninStatus); // Listen for sign-in status changes
-    updateSigninStatus(auth2.isSignedIn.get()); // Check sign-in status on load
-  }).catch(function(error) {
-    console.error("Error initializing Google API client:", error);
-  });
-}
 
+function initClient() {
+    console.log("Initializing Google API client...");
+    gapi.client.init({
+      apiKey: API_KEY,
+      clientId: CLIENT_ID,
+      scope: SCOPES,
+    }).then(function () {
+      auth2 = gapi.auth2.getAuthInstance();
+      auth2.isSignedIn.listen(updateSigninStatus);
+      updateSigninStatus(auth2.isSignedIn.get());
+      console.log("Google API client initialized.");
+    }).catch(function (error) {
+      console.error("Error initializing Google API client:", error);
+    });
+  }
+  
 // Sign in when the user clicks the "Authorize" button
 function handleAuthClick() {
-  auth2.signIn().then(function() {
-    console.log("User signed in!");
-    loadSheetsApi();  // Load Sheets API after sign-in
-  }).catch(function(error) {
-    console.error("Error signing in:", error);
-  });
-}
+    auth2.signIn().then(function (response) {
+      console.log("User signed in!");
+      loadSheetsApi(); // Proceed to load Google Sheets API after successful sign-in
+    }).catch(function (error) {
+      console.error("Sign-in failed:", error);
+    });
+  }
+  
 
 // Sign out when the user clicks the "Sign Out" button
 function handleSignoutClick() {
