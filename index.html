@@ -7,21 +7,29 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
+  <h1>Button Click Tracker</h1>
 
-  <!-- Text box for entering the user's call sign -->
+  <!-- User callsign input field -->
   <input type="text" id="userCallSign" placeholder="Enter your callsign">
-    <br>
+  <br>
+
   <!-- 8 buttons for different actions -->
-  <button class="button" id="Avaliable" data-button="Avaliable">Avaliable</button>
-  <button class="button" id="Enroute" data-button="Enroute">Enroute</button>
-  <button class="button" id="OnScene" data-button="On Scene">On Scene</button>
-  <button class="button" id="GoingToHospital" data-button="Going To Hospital">Going To Hospital</button>
-  <button class="button" id="AtHospital" data-button="At Hospital">At Hospital</button>
-  <button class="button" id="GoingToBase" data-button="Going To Base">Going To Base</button>
-  <button class="button" id="AtBase" data-button="At Base">At Base</button>
-  <button class="button" id="Busy" data-button="Busy">Busy</button>
+  <button class="button" data-button="Available">Available</button>
+  <button class="button" data-button="Enroute">Enroute</button>
+  <button class="button" data-button="On Scene">On Scene</button>
+  <button class="button" data-button="Going To Hospital">Going To Hospital</button>
+  <button class="button" data-button="At Hospital">At Hospital</button>
+  <button class="button" data-button="Going To Base">Going To Base</button>
+  <button class="button" data-button="At Base">At Base</button>
+  <button class="button" data-button="Busy">Busy</button>
 
+  <br><br>
+
+  <!-- Authorization buttons -->
+  <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
+  <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+
+  <script src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
   <script src="index.js"></script>
-
 </body>
 </html>
