@@ -99,6 +99,7 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbzF27e_0B0GPjkr2Djd4v
                 case "Unavailable":
                 case "Meal Break":
                 case "Off Duty":
+                case "Refueling":
                     return "red";
                 default:
                     return "gray"; // Default for undefined statuses
