@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Console</title>
+    <link rel="stylesheet" href="admin-console.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Console</h1>
+        <button onclick="window.location.href='index.html'">Log Out</button>
+    </header>
+
+    <section class="filter-section">
+        <label for="statusFilter">Filter by Status:</label>
+        <select id="statusFilter" onchange="filterUnits()">
+            <option value="">All Statuses</option>
+            <option value="Available">Available</option>
+            <option value="En Route">En Route</option>
+            <option value="On Scene">On Scene</option>
+            <option value="Transporting To Hospital">Transporting To Hospital</option>
+            <option value="At Hospital">At Hospital</option>
+            <option value="Going To Base">Going To Base</option>
+            <option value="At Base">At Base</option>
+            <option value="Going To Standby">Going To Standby</option>
+            <option value="At Standby">At Standby</option>
+            <option value="Unavaliable">Unavaliable</option>
+            <option value="Meal Break">Meal Break</option>
+            <option value="Off Duty">Off Duty</option>
+        </select>
+    </section>
+
+    <section class="color-filter-section">
+        <label for="colorFilter">Filter by Status Color:</label>
+        <select id="colorFilter">
+            <option value="">All</option>
+            <option value="green">Green</option>
+            <option value="orange">Orange</option>
+            <option value="red">Red</option>
+        </select>
+    </section>
+
+    <section id="unitList">
+        <!-- Admin Console -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Callsign</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="unit-table-body">
+                <!-- Data will be populated here -->
+            </tbody>
+        </table>
+        
+    </section>
+
+    <iframe id="iframeControl" src="index.html" style="width: 100%; height: 80vh; border: none;"></iframe>
+
+    <script src="admin-console.js"></script>
+</body>
+</html>

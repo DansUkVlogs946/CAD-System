@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Button Click Tracker</title>
-  <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roleplay CAD System</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
 </head>
 <body>
-  <h1>Button Click Tracker</h1>
+    <h1>Roleplay CAD System</h1>
 
-  <!-- User callsign input field -->
-  <input type="text" id="userCallSign" placeholder="Enter your callsign">
-  <br>
+    <label for="callsign">Enter Callsign:</label>
+    <input type="text" id="callsign" placeholder="Enter your callsign">
 
-  <!-- 8 buttons for different actions -->
-  <button class="button" data-button="Available">Available</button>
-  <button class="button" data-button="Enroute">Enroute</button>
-  <button class="button" data-button="On Scene">On Scene</button>
-  <button class="button" data-button="Going To Hospital">Going To Hospital</button>
-  <button class="button" data-button="At Hospital">At Hospital</button>
-  <button class="button" data-button="Going To Base">Going To Base</button>
-  <button class="button" data-button="At Base">At Base</button>
-  <button class="button" data-button="Busy">Busy</button>
+    <button onclick="updateStatus('Available')">Available</button>
+    <button onclick="updateStatus('En Route')">En Route</button>
+    <button onclick="updateStatus('On Scene')">On Scene</button>
+    <button onclick="updateStatus('Transporting To Hospital')">Transporting To Hospital</button>
+    <button onclick="updateStatus('At Hospital')">At Hospital</button>
+    <button onclick="updateStatus('Going To Base')">Going To Base</button>
+    <button onclick="updateStatus('At Base')">At Base</button>
+    <button onclick="updateStatus('Going To Standby')">Going To Standby</button>
+    <button onclick="updateStatus('At Standby')">At Standby</button>
+    <button onclick="updateStatus('Unavaliable')">Unavaliable</button>
+    <button onclick="updateStatus('Meal Break')">Meal Break</button>
+    <button onclick="updateStatus('Off Duty')" id="btnOffDuty">Off Duty</button>
 
-  <br><br>
-
-  <!-- Authorization buttons -->
-  <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
-  <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
-
-  <script src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
-  <script src="index.js"></script>
+    <button onclick="window.location.href='login.html'">Log In</button>
 </body>
 </html>

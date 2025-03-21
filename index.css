@@ -1,19 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+input, button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+}
 button {
-    font-size: 4vh;
-    background-color: grey;
+    width: 250px;
+    background-color: #007bff;
     color: white;
-    border: 1vh fixed black;
-    border-radius: 1vh;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+button:focus{
+    background-color: orange;
 }
 
-button:active {
-    color: green;
+#btnOffDuty {
+  background-color: red;
+  color: white;
 }
 
-#userCallSign {
-    font-size: 4vh;
-    border: 1vh fixed black;
-    border-radius: 1vh;
-    padding: 1vh;
-    margin-bottom: 10vh;
+#btnOffDuty:hover {
+  background-color: darkred;
 }

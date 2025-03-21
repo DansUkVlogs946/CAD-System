@@ -1,111 +1,29 @@
-const CLIENT_ID = '238918197298-0h1h33oh88lmdl9etpu9181hpefamkm8.apps.googleusercontent.com';
-const API_KEY = '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'; // Replace with your actual API key
-const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
-let auth2;
+function updateStatus(status) {
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzF27e_0B0GPjkr2Djd4vQ_GKpaaeae8QAVT9ol7yurdxwRrCr62tSo9pFx5_tQ_ZtBGQ/exec";  // Replace with your Google Apps Script URL
+  const callsign = document.getElementById("callsign").value.trim();
 
-// Initialize Google API client and auth2
-function handleClientLoad() {
-    console.log(gapi); // Check if gapi is loaded
-    gapi.load('client:auth2', initClient);
+  if (callsign === "") {
+    alert("Please enter a callsign.");
+    return;
   }
-  
 
-// Initialize the API client and set up the sign-in status
+  const url = `${scriptURL}?user=${encodeURIComponent(callsign)}&status=${encodeURIComponent(status)}`;
 
-function initClient() {
-    console.log("Initializing Google API client...");
-    gapi.client.init({
-      apiKey: API_KEY,
-      clientId: CLIENT_ID,
-      scope: SCOPES,
-    }).then(function () {
-      auth2 = gapi.auth2.getAuthInstance();
-      auth2.isSignedIn.listen(updateSigninStatus);
-      updateSigninStatus(auth2.isSignedIn.get());
-      console.log("Google API client initialized.");
-    }).catch(function (error) {
-      console.error("Error initializing Google API client:", error);
-    });
-  }
-  
-// Sign in when the user clicks the "Authorize" button
-function handleAuthClick() {
-    auth2.signIn().then(function (response) {
-      console.log("User signed in!");
-      loadSheetsApi(); // Proceed to load Google Sheets API after successful sign-in
-    }).catch(function (error) {
-      console.error("Sign-in failed:", error);
-    });
-  }
-  
-
-// Sign out when the user clicks the "Sign Out" button
-function handleSignoutClick() {
-  auth2.signOut().then(function() {
-    console.log("User signed out!");
-    document.getElementById('authorize_button').style.display = 'block';
-    document.getElementById('signout_button').style.display = 'none';
-  }).catch(function(error) {
-    console.error("Error signing out:", error);
-  });
-}
-
-// Load the Sheets API once the user has authorized
-function loadSheetsApi() {
-  gapi.client.load("sheets", "v4", function() {
-    console.log("Google Sheets API loaded.");
-    document.getElementById('authorize_button').style.display = 'none';
-    document.getElementById('signout_button').style.display = 'block';
-    setUpButtonClicks();  // Set up button click handlers after API is loaded
-  });
-}
-
-// Update the UI based on sign-in status
-function updateSigninStatus(isSignedIn) {
-  if (isSignedIn) {
-    document.getElementById('authorize_button').style.display = 'none';
-    document.getElementById('signout_button').style.display = 'block';
-  } else {
-    document.getElementById('authorize_button').style.display = 'block';
-    document.getElementById('signout_button').style.display = 'none';
-  }
-}
-
-// Set up event listeners for button clicks
-function setUpButtonClicks() {
-  const buttons = document.querySelectorAll('.button');
-  buttons.forEach(button => {
-    button.addEventListener('click', function() {
-      const userCallSign = document.getElementById('userCallSign').value;
-      const buttonLabel = this.getAttribute('data-button');
-      if (userCallSign && buttonLabel) {
-        addButtonData(userCallSign, buttonLabel);
+  fetch(url, { method: "GET" })
+    .then(response => response.json())  // Parse JSON response
+    .then(data => {
+      // Handle JSON response
+      if (data.success) {
+        if (status === "Off Duty") {
+          alert("User has been removed from the system.");
+        } else {
+          console.log(`Status updated to: ${status}`);
+        }
       } else {
-        alert('Please enter your callsign.');
+        alert(data.message);  // Show the error message if something goes wrong
       }
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
     });
-  });
-}
-
-// Add button data to Google Sheets
-function addButtonData(userCallSign, buttonLabel) {
-  const params = {
-    spreadsheetId: '13UGFlf82Brv3bz-uDG3P76BmL_0pe45-vePiGNFpVUk', // Replace with your actual Google Sheets ID
-    range: 'Sheet1!A1:C1', // Adjust this range based on where you want to add data
-    valueInputOption: 'RAW',
-    insertDataOption: 'INSERT_ROWS',
-  };
-
-  const valueRangeBody = {
-    "values": [
-      [new Date().toISOString(), userCallSign, buttonLabel] // Add timestamp, user, and button clicked
-    ]
-  };
-
-  const request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
-  request.then(function(response) {
-    console.log('Data added successfully:', response);
-  }, function(error) {
-    console.error('Error adding data:', error);
-  });
 }
