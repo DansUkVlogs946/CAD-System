@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roleplay CAD System</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/png" href="assets\images\favicon.png">
     <script src="index.js"></script>
 </head>
 <body>
@@ -17,12 +18,13 @@
     <button onclick="updateStatus('En Route')">En Route</button>
     <button onclick="updateStatus('On Scene')">On Scene</button>
     <button onclick="updateStatus('Transporting To Hospital')">Transporting To Hospital</button>
-    <button onclick="updateStatus('At Hospital')">At Hospital</button>
+    <button onclick="handleAtStatus('At Hospital')">At Hospital</button>
     <button onclick="updateStatus('Going To Base')">Going To Base</button>
-    <button onclick="updateStatus('At Base')">At Base</button>
+    <button onclick="handleAtStatus('At Base')">At Base</button>
     <button onclick="updateStatus('Going To Standby')">Going To Standby</button>
-    <button onclick="updateStatus('At Standby')">At Standby</button>
+    <button onclick="handleAtStatus('At Standby')">At Standby</button>
     <button onclick="updateStatus('Unavaliable')">Unavaliable</button>
+    <button onclick="updateStatus('Busy')">Busy</button>
     <button onclick="updateStatus('Refueling')">Refueling</button>
     <button onclick="updateStatus('Meal Break')">Meal Break</button>
     <button onclick="updateStatus('Off Duty')" id="btnOffDuty">Off Duty</button>

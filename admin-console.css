@@ -64,22 +64,19 @@ th {
 
 /* Color coding for statuses */
 .green {
-    background-color: #28a745; /* Green */
-    color: white;
+    background-color: #81c784; /* Light Green */
 }
 
 .orange {
-    background-color: #fd7e14; /* Orange */
-    color: white;
+    background-color: #ffb74d; /* Light Orange */
 }
 
 .red {
-    background-color: #dc3545; /* Red */
-    color: white;
+    background-color: #e57373; /* Light Red */
 }
 
 .gray {
-    background-color: #6c757d; /* Gray (default) */
-    color: white;
+    background-color: #e0e0e0; /* Light Gray */
 }
+
 
